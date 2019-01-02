@@ -23,20 +23,17 @@ Route::group(['middleware' => ['web']] , function () {
     //Route::post('auth/register','Auth\AuthController@postRegister');
 
     //categories
- Route::resource('categories','CategoryController',['except'=> ['create']]);   
+    Route::resource('categories','CategoryController',['except'=> ['create']]);   
 
+    Route::get('/blog/{slug}', ['as'=> 'blog.single', 'uses' => 'WikiController@getSingle'])->where('slug' , '[\w\d\-\_]+');
+    Route::get('blog', ['uses' => 'WikiController@getIndex', 'as' => 'blog.index']);
+    Route::get('/contact', 'blogController@getcontact');
+    Route::get('/about', 'blogController@getabout');
+    Route::get('/', 'blogController@getindex');
+    Route::get('category/{category_id}','CategoryController@getCategory')->name('category');
 
+    Route::resource('posts', 'PostsController');
 
-Route::get('/blog/{slug}', ['as'=> 'blog.single', 'uses' => 'WikiController@getSingle']) 
-->where('slug' , '[\w\d\-\_]+');
-Route::get('blog', ['uses' => 'WikiController@getIndex', 'as' => 'blog.index']);
-Route::get('/contact', 'blogController@getcontact');
-Route::get('/about', 'blogController@getabout');
-Route::get('/', 'blogController@getindex');
-
-
-
-Route::resource('posts', 'PostsController');
 });
 
 

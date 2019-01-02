@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\category;
 
 
 class blogController extends Controller{
 
     public function getIndex() {
+        $categories = category::all();
+        // return($categories);
         $posts= Post::orderBy('created_at','desc')->limit(4)->get();
-        return view('pages.welcome')->withPosts($posts);
-  }
+        return view('pages.welcome',compact('posts','categories'));
+    }
     public function getabout(){
         $first = 'ishani';
         $last = 'Wijaya';
@@ -28,7 +31,7 @@ class blogController extends Controller{
         
     }
 
-public function getimagegallery(){
+    public function getimagegallery(){
         return view('pages.imagegallery');;
         
     }

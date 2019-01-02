@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use Session;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -102,5 +103,12 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCategory($category_id)
+    {
+        $posts = DB::table('posts')->where('category_id', $category_id)->get();
+        $categories = category::all();
+        return view('pages.welcome',compact('posts','categories'));
     }
 }

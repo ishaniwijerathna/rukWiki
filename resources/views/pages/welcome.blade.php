@@ -45,8 +45,10 @@
 
       </div>
          <div class="col-md-3 col-md-offset-1">
-             <h2>Sidebar</h2>
-             
+            <h2>Sidebar</h2>
+            @foreach($categories as $category)
+               <a href="{{ route('category',$category->id) }}">{{ $category->name }}</a>
+            @endforeach
          </div>
 
       </div>
